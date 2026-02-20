@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Expense Tracker</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Smart Expense Tracker</h1>
+
+  <input type="text" id="category" placeholder="Category (Food, Travel)">
+  <input type="number" id="amount" placeholder="Amount">
+  <button onclick="addExpense()">Add Expense</button>
+
+  <h3>Total: ₹<span id="total">0</span></h3>
+
+  <canvas id="myChart" width="400" height="200"></canvas>
+
+  <script>
+    let expenses = [];
+    let total = 0;
+
+    function addExpense() {
+      let category = document.getElementById("category").value;
+      let amount = parseInt(document.getElementById("amount").value);
+
+      if (!category || !amount) {
+        alert("Please fill all fields");
+        return;
+      }
+
+      expenses.push({category, amount});
+      total += amount;
+
+      document.getElementById("total").innerText = total;
+
+      updateChart();
+    }
+
+    function updateChart() {
+      let categories = {};
+      expenses.forEach(e => {
+        categories[e.category] = (categories[e.category] || 0) + e.amount;
+      });
+
+      let labels = Object.keys(categories);
+      let data = Object.values(categories);
+
+      new Chart(document.getElementById("myChart"), {
+        type: 'pie',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: data
+          }]
+        }
+      });
+    }
+  </script>
+</body>
+</html>
