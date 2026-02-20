@@ -64,6 +64,22 @@ button:hover {
     background: #444;
     color: white;
 }
+    ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+ul li {
+    background: #f1f1f1;
+    padding: 8px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+}
+
+.dark ul li {
+    background: #3a3a3a;
+}
 </style>
 </head>
 <body>
@@ -78,6 +94,9 @@ button:hover {
   <h3>Total: ₹<span id="total">0</span></h3>
 
   <canvas id="myChart" width="400" height="200"></canvas>
+    <ul id="expenseList"></ul>
+    <h3>Expense List</h3>
+<ul id="expenseList"></ul>
 
   <script>
     let expenses = [];
@@ -97,6 +116,12 @@ button:hover {
         category: category.trim().toLowerCase(),
    amount: amount
 });
+      let list = document.getElementById("expenseList");
+
+let li = document.createElement("li");
+li.innerText = category + " - ₹" + amount;
+
+list.appendChild(li);
       total += amount;
       document.getElementById("category").value = "";
 document.getElementById("amount").value = "";
