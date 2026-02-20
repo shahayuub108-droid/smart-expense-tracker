@@ -52,14 +52,28 @@
       let data = Object.values(categories);
 
       new Chart(document.getElementById("myChart"), {
-        type: 'pie',
-        data: {
-          labels: labels,
-          datasets: [{
+    type: 'pie',
+    data: {
+        labels: labels,
+        datasets: [{
             data: data
-          }]
+        }]
+    },
+    options: {
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        let totalSum = context.dataset.data.reduce((a, b) => a + b, 0);
+                        let value = context.raw;
+                        let percentage = ((value / totalSum) * 100).toFixed(1);
+                        return context.label + ": ₹" + value + " (" + percentage + "%)";
+                    }
+                }
+            }
         }
-      });
+    }
+});
       if (categories["food"] && categories["food"] > total * 0.4) {
   alert("💡 You are spending heavily on Food. Try reducing it.");
 }
