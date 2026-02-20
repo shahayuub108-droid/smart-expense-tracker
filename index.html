@@ -28,7 +28,10 @@
         return;
       }
 
-      expenses.push({category, amount});
+      expenses.push({
+        category: category.trim().toLowerCase(),
+   amount: amount
+});
       total += amount;
 
       document.getElementById("total").innerText = total;
@@ -57,7 +60,7 @@
           }]
         }
       });
-      if (categories["Food"] && categories["Food"] > total * 0.4) {
+      if (categories["food"] && categories["food"] > total * 0.4) {
   alert("💡 You are spending heavily on Food. Try reducing it.");
 }
     }
