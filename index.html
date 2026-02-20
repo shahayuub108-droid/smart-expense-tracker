@@ -141,8 +141,15 @@ deleteBtn.innerText = "❌";
 deleteBtn.classList.add("delete-btn");
 
 deleteBtn.onclick = function() {
+
+    // expenses array se item remove karo
+    expenses = expenses.filter(function(exp) {
+        return !(exp.category === category.trim().toLowerCase() && exp.amount === amount);
+    });
+
     total -= amount;
     document.getElementById("total").innerText = total;
+
     li.remove();
     updateChart();
 };
