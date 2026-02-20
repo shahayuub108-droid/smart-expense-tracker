@@ -34,6 +34,8 @@
    amount: amount
 });
       total += amount;
+      document.getElementById("category").value = "";
+document.getElementById("amount").value = "";
 
       document.getElementById("total").innerText = total;
       if (total > 5000) {
@@ -51,7 +53,9 @@
 
       let labels = Object.keys(categories);
       let data = Object.values(categories);
+      console.log(categories);
       if (myChart) {
+        console.log(categories);
     myChart.destroy();
 }
 
