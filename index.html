@@ -18,6 +18,7 @@
   <script>
     let expenses = [];
     let total = 0;
+    let myChart;
 
     function addExpense() {
       let category = document.getElementById("category").value;
@@ -50,8 +51,11 @@
 
       let labels = Object.keys(categories);
       let data = Object.values(categories);
+      if (myChart) {
+    myChart.destroy();
+}
 
-      new Chart(document.getElementById("myChart"), {
+      myChart = new Chart(document.getElementById("myChart"), {
     type: 'pie',
     data: {
         labels: labels,
