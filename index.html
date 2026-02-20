@@ -80,6 +80,19 @@ ul li {
 .dark ul li {
     background: #3a3a3a;
 }
+    .delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.delete-btn:hover {
+    background: darkred;
+}
 </style>
 </head>
 <body>
@@ -119,7 +132,23 @@ ul li {
       let list = document.getElementById("expenseList");
 
 let li = document.createElement("li");
-li.innerText = category + " - ₹" + amount;
+
+let span = document.createElement("span");
+span.innerText = category + " - ₹" + amount;
+
+let deleteBtn = document.createElement("button");
+deleteBtn.innerText = "❌";
+deleteBtn.classList.add("delete-btn");
+
+deleteBtn.onclick = function() {
+    total -= amount;
+    document.getElementById("total").innerText = total;
+    li.remove();
+    updateChart();
+};
+
+li.appendChild(span);
+li.appendChild(deleteBtn);
 
 list.appendChild(li);
       total += amount;
