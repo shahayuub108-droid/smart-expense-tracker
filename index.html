@@ -32,6 +32,9 @@
       total += amount;
 
       document.getElementById("total").innerText = total;
+      if (total > 5000) {
+  alert("⚠ You are exceeding your monthly budget!");
+}
 
       updateChart();
     }
@@ -54,6 +57,9 @@
           }]
         }
       });
+      if (categories["Food"] && categories["Food"] > total * 0.4) {
+  alert("💡 You are spending heavily on Food. Try reducing it.");
+}
     }
   </script>
 </body>
