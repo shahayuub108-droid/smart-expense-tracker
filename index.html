@@ -44,11 +44,32 @@ button {
 button:hover {
     background: #0056b3;
 }
+    .dark {
+    background: #1e1e1e;
+    color: white;
+}
+
+.dark .container {
+    background: #2c2c2c;
+    color: white;
+}
+
+.dark input {
+    background: #444;
+    color: white;
+    border: 1px solid #666;
+}
+
+.dark button {
+    background: #444;
+    color: white;
+}
 </style>
 </head>
 <body>
   <div class="container">
   <h1>Smart Expense Tracker</h1>
+    <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
 
   <input type="text" id="category" placeholder="Category (Food, Travel)">
   <input type="number" id="amount" placeholder="Amount">
