@@ -102,12 +102,15 @@ ul li {
 
   <input type="text" id="category" placeholder="Category (Food, Travel)">
   <input type="number" id="amount" placeholder="Amount">
+    <input type="date" id="date">
   <button onclick="addExpense()">Add Expense</button>
 
   <h3>Total: ₹<span id="total">0</span></h3>
+    <h3>Daily Total: ₹<span id="dailyTotal">0</span></h3>
+<h3>Monthly Total: ₹<span id="monthlyTotal">0</span></h3>
 
   <canvas id="myChart" width="400" height="200"></canvas>
-    <ul id="expenseList"></ul>
+
     <h3>Expense List</h3>
 <ul id="expenseList"></ul>
 
@@ -125,9 +128,10 @@ ul li {
         return;
       }
 
-      expenses.push({
-        category: category.trim().toLowerCase(),
-   amount: amount
+     expenses.push({
+    category: category.trim().toLowerCase(),
+    amount: amount,
+    date: date
 });
       let list = document.getElementById("expenseList");
 
@@ -172,9 +176,24 @@ document.getElementById("amount").value = "";
 
     function updateChart() {
       let categories = {};
-      expenses.forEach(e => {
-        categories[e.category] = (categories[e.category] || 0) + e.amount;
-      });
+      let today = new Date().toISOString().split("T")[0];
+let dailyTotal = 0;
+let monthlyTotal = 0;
+     expenses.forEach(e => {
+       
+    categories[e.category] = (categories[e.category] || 0) + e.amount;
+
+    if (e.date === today) {
+        dailyTotal += e.amount;
+    }
+
+    if (e.date && e.date.substring(0,7) === today.substring(0,7)) {
+        monthlyTotal += e.amount;
+    }
+
+});
+      document.getElementById("dailyTotal").innerText = dailyTotal;
+document.getElementById("monthlyTotal").innerText = monthlyTotal;
 
       let labels = Object.keys(categories);
       let data = Object.values(categories);
